@@ -18,9 +18,11 @@ export default function request(baseUrl, path, options) {
       const response = {
         status: res.status,
         headers,
+        originalRequest: url,
+        options,
       };
 
-      if (res.status !== 204) {
+      if (res.status !== 204 && res.status !== 401) {
         return res.json().then(body => ({ ...response, body }));
       }
 
